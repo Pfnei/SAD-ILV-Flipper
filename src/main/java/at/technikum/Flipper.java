@@ -5,9 +5,12 @@ import at.technikum.state.*;
 public class Flipper {
 	private State state;
 	private int credits;
+	private int remainingBalls;
+	private static final int MAX_BALLS = 3;
 	
 	Flipper() {
 		this.state = new NoCreditState(this);
+		this.remainingBalls =  MAX_BALLS;
 	}
 	
 	
@@ -47,8 +50,16 @@ public class Flipper {
 		insertCoin();
 		flipRight();
 		pressStart();
+		flipLeft();
+		flipLeft();
+		
+	
 		
 	}
+	
+	
+	public void decrementRemainingBalls() {remainingBalls--;}
+	public int getRemainingBalls() {return this.remainingBalls;};
 	
 	public void incrementCredit() {credits++;}
 	
