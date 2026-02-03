@@ -10,7 +10,8 @@ public class ReadyState extends State{
 	
 	@Override
 	public void pressStart() {
-	
+		flipper.decrementCredit();
+		flipper.transitionToPlaying();
 	}
 	
 	@Override

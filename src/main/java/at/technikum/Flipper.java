@@ -6,7 +6,9 @@ public class Flipper {
 	private State state;
 	private int credits;
 	
-	Flipper() {this.state = new NoCreditState(this);}
+	Flipper() {
+		this.state = new NoCreditState(this);
+	}
 	
 	
 	public void transitionToReady() {
@@ -30,19 +32,45 @@ public class Flipper {
 	}
 	
 	
-	public void incrementCredit() {
-		credits++;
+	public static void main(String[] args) {
+		Flipper flipper = new Flipper();
+		flipper.play();
 	}
 	
-	public void decrementCredit() {
-		credits--;
+	public void play() {
+		System.out.println("=== FLIPPER GAME ===\n");
+		
+		pressStart();
+		insertCoin();
+		pressStart();
+		flipLeft();
+		insertCoin();
+		flipRight();
+		pressStart();
+		
 	}
 	
-	public int getCredits() {
-		return this.credits;
+	public void incrementCredit() {credits++;}
+	
+	public void decrementCredit() {credits--;}
+	
+	public int getCredits() {return this.credits;}
+	
+	public State getState() {return this.state;}
+	
+	public void pressStart() {
+		state.pressStart();
 	}
 	
-	public State getState() {
-		return this.state;
+	public void insertCoin() {
+		state.insertCoin();
+	}
+	
+	public void flipLeft() {
+		state.flipLeft();
+	}
+	
+	public void flipRight() {
+		state.flipRight();
 	}
 }

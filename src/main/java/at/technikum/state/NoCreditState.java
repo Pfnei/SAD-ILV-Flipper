@@ -10,16 +10,17 @@ public class NoCreditState extends State {
 	
 	@Override
 	public void pressStart() {
-	
+		System.out.println("Kein Kredit vorhanden!");
+		System.out.println("Bitte Münze einwerfen.");
 	}
 	
 	@Override
 	public void flipLeft() {
-	
+		// ev. Highscore anzeigen
 	}
 	
 	@Override
 	public void flipRight() {
-	
+		// ev. Highscore anzeigen
 	}
 }
