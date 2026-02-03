@@ -12,19 +12,13 @@ public class Light implements Element {
 		this.isOn = false;
 	}
 	
+	
+	
 	@Override
 	public int getId() {return id;}
 	
 	@Override
 	public String getType() {return "light";}
-	
-	public void toogleLight() {
-		isOn = !isOn;
-		if (isOn)
-			System.out.println("Light " + id + " is on.");
-		else
-			System.out.println("Light " + id + " is off.");
-	}
 	
 	@Override
 	public void hit(Flipper flipper) {
@@ -35,6 +29,14 @@ public class Light implements Element {
 		}
 		else {new AddPointsCommand(50).execute(flipper);}
 		this.toogleLight();
+	}
+	
+	public void toogleLight() {
+		isOn = !isOn;
+		if (isOn)
+			System.out.println("Light " + id + " is on.");
+		else
+			System.out.println("Light " + id + " is off.");
 	}
 	
 }

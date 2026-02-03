@@ -1,6 +1,7 @@
 package at.technikum.flipper.state;
 
 import at.technikum.flipper.Flipper;
+import at.technikum.flipper.util.Util;
 
 import java.util.Scanner;
 
@@ -26,7 +27,7 @@ public class EndState extends State {
 				scanner.next();
 			}
 		}
-		int random = (int) (Math.random() * 5) + 1;
+		int random = Util.randomInt(1,5);
 		if (guess == random) {
 			System.out.println("Gewonnen! +1 Kredit");
 			flipper.addCredit();

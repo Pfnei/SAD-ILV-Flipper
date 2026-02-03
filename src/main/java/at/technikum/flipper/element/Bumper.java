@@ -4,6 +4,9 @@ import at.technikum.flipper.Flipper;
 import at.technikum.flipper.command.AddPointsCommand;
 import at.technikum.flipper.command.Command;
 import at.technikum.flipper.command.ToggleLightCommand;
+import at.technikum.flipper.util.Util;
+
+import java.util.ArrayList;
 
 public class Bumper implements Element {
 	private final int id;
@@ -19,6 +22,9 @@ public class Bumper implements Element {
 	public void hit(Flipper flipper) {
 		System.out.println("Hit Bumper " + id);
 		new AddPointsCommand(100*id).execute(flipper);
-		new ToggleLightCommand(4).execute(flipper);
+		ArrayList<Integer> listOfLightIDs = flipper.getElementMediator().getListOfLightIDs();
+		int sizeLightsList = listOfLightIDs.size();
+		int randomLight =  Util.randomInt(0,sizeLightsList-1);
+		new ToggleLightCommand(listOfLightIDs.get(randomLight)).execute(flipper);
 	}
 }
