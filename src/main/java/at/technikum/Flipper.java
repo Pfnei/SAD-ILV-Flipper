@@ -6,15 +6,43 @@ public class Flipper {
 	private State state;
 	private int credits;
 	
-	Flipper() {
+	Flipper() {this.state = new NoCreditState(this);}
 	
+	
+	public void transitionToReady() {
+		this.state = new ReadyState(this);
+		System.out.println("Neuer Zustand: Ready-Zustand");
 	}
 	
-	public void incrementCredits() {
+	public void transitionToPlaying() {
+		this.state = new PlayingState(this);
+		System.out.println("Neuer Zustand: Playing-Zustand");
+	}
+	
+	public void transitionToNoCredit() {
+		this.state = new NoCreditState(this);
+		System.out.println("Neuer Zustand: NoCredit-Zustand");
+	}
+	
+	public void transitionToEndState() {
+		System.out.println("Neuer Zustand: EndState!");
+		this.state = new EndState(this);
+	}
+	
+	
+	public void incrementCredit() {
 		credits++;
 	}
 	
-	public void decrementCredits() {
+	public void decrementCredit() {
 		credits--;
+	}
+	
+	public int getCredits() {
+		return this.credits;
+	}
+	
+	public State getState() {
+		return this.state;
 	}
 }

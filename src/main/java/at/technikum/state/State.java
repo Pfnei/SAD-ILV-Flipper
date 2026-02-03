@@ -14,7 +14,13 @@ public abstract class State {
 	public abstract void flipRight();
 	
 	public void insertCoin() {
-		this.flipper.incrementCredits();
+		this.flipper.incrementCredit();
+		if (flipper.getState() instanceof NoCreditState) {
+			flipper.transitionToReady();
+		}
+		else {
+			System.out.println("Kredit erhöht auf: " + flipper.getCredits());
+		}
 	}
 	
 	public Flipper getFlipper() {
