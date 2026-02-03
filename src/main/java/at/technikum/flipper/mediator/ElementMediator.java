@@ -1,8 +1,7 @@
 package at.technikum.flipper.mediator;
 
 import at.technikum.flipper.Flipper;
-import at.technikum.flipper.element.Bumper;
-import at.technikum.flipper.element.Element;
+import at.technikum.flipper.element.*;
 
 
 public class ElementMediator {
@@ -19,6 +18,7 @@ public class ElementMediator {
 						new Bumper(1),
 						new Bumper(2),
 						new Bumper(3),
+						new Light (4)
 				};
 		
 		
@@ -26,6 +26,16 @@ public class ElementMediator {
 	
 	
 	public void hit(int elementId) {
+		for (Element e : elements) {
+			if (e.getId() == elementId) {
+				e.hit (flipper);
+				return;
+			}
+		}
+		System.out.println("Unbekanntes Element: " + elementId);
+	}
+	
+	public void toogleLight(int elementId) {
 		for (Element e : elements) {
 			if (e.getId() == elementId) {
 				e.hit (flipper);

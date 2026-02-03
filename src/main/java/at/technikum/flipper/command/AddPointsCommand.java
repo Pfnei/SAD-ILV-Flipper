@@ -2,7 +2,7 @@ package at.technikum.flipper.command;
 
 import at.technikum.flipper.Flipper;
 
-public class AddPointsCommand {
+public class AddPointsCommand implements Command {
 	
 	private int newPoints;
 	

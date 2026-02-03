@@ -69,7 +69,7 @@ public class Flipper {
 	
 	
 	
-	
+	public ElementMediator getElementMediator() {return this.elementMediator;}
 	public void decrementRemainingBalls() {remainingBalls--;}
 	public int getRemainingBalls() {return this.remainingBalls;};
 	
