@@ -1,6 +1,6 @@
-package at.technikum.state;
+package at.technikum.flipper.state;
 
-import at.technikum.Flipper;
+import at.technikum.flipper.Flipper;
 
 public class PlayingState extends State {
 	

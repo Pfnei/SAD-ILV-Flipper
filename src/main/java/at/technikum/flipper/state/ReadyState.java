@@ -1,6 +1,6 @@
-package at.technikum.state;
+package at.technikum.flipper.state;
 
-import at.technikum.Flipper;
+import at.technikum.flipper.Flipper;
 
 public class ReadyState extends State{
 	
@@ -10,7 +10,7 @@ public class ReadyState extends State{
 	
 	@Override
 	public void pressStart() {
-		flipper.decrementCredit();
+		flipper.useOneCredit();
 		flipper.transitionToPlaying();
 	}
 	

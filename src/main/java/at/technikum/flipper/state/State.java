@@ -1,6 +1,6 @@
-package at.technikum.state;
+package at.technikum.flipper.state;
 
-import at.technikum.Flipper;
+import at.technikum.flipper.Flipper;
 
 public abstract class State {
 	protected Flipper flipper;
@@ -14,7 +14,7 @@ public abstract class State {
 	public abstract void flipRight();
 	
 	public void insertCoin() {
-		this.flipper.incrementCredit();
+		this.flipper.addCredit();
 		if (flipper.getState() instanceof NoCreditState) {
 			flipper.transitionToReady();
 		}
