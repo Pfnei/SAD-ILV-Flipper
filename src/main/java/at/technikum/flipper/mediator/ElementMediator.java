@@ -4,66 +4,76 @@ import at.technikum.flipper.Flipper;
 import at.technikum.flipper.element.*;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Filter;
 
 
 public class ElementMediator {
 	
 	
-	private Element[] elements;
-	private ArrayList<Integer> listOfLightIDs = new ArrayList<>();
+	private ArrayList<FlipperElement> elements;
+	private ArrayList<Light> listOfLights = new ArrayList<>();
 	protected final Flipper flipper;
 	
 	public ElementMediator(Flipper flipper) {
 		this.flipper = flipper;
-		this.elements = new Element[]
-				
-				{
-						new Bumper(1),
-						new Light (2),
-						new Bumper(3),
-						new Bumper(4),
-						new Light (5),
-						new Light (6),
-						new Light (7)
-						
-				};
-		this.intializeLightIDList();
+		this.elements = new ArrayList<>();
+		this.elements.add(new Bumper("Bumper1"));
+		this.elements.add(new Light("Light1"));
+		this.elements.add(new Bumper("Bumper2"));
+		this.elements.add(new Bumper("Bumper3"));
+		this.elements.add(new Light("Light2"));
+		this.elements.add(new Light("Light3"));
+		this.elements.add(new Light("Light4"));
+		
+		this.intializeLightList();
 		
 	}
 	
 	
-	private void intializeLightIDList() {
-		for (Element e : elements) {
-			if (e.getType().equals("light")) {
-				listOfLightIDs.add(e.getId());		}
+	private void intializeLightList() {
+		for (FlipperElement e : elements) {
+			if (e instanceof Light) {
+				listOfLights.add((Light) e);
+			}
 		}
 	}
-	public ArrayList<Integer> getListOfLightIDs() {
-		return listOfLightIDs;
+	
+	public ArrayList<Light> getListOfLights() {
+		return listOfLights;
 	}
 	
-	public void hit(int elementId) {
-		for (Element e : elements) {
-			if (e.getId() == elementId) {
-				e.hit (flipper);
+	public void hit(String name) {
+		for (FlipperElement e : elements) {
+			if (e.getName().equals(name)) {
+				e.hit(flipper);
 				return;
 			}
 		}
-		System.out.println("Unbekanntes Element: " + elementId);
+		System.out.println("Unbekanntes Element: " + name);
 	}
 	
-	public void toogleLight(int elementId) {
-		for (Element e : elements) {
-			if (e.getId() == elementId) {
-				if (e.getType().equals("light")) {
-				e.hit (flipper);}
-				else {
-					System.out.println("Element: " + elementId + " is kein Light");
+	public void hit(int arrayIndex) {
+		if (0 <= arrayIndex && arrayIndex < this.elements.size()) {
+			this.elements.get(arrayIndex).hit(flipper);
+		}
+		else { System.out.println("ArrayIndex out of Bounds"); }
+		return;
+		
+	}
+	
+	public void toogleLight(String name) {
+		for (FlipperElement e : elements) {
+			if (e.getName().equals(name)) {
+				if (e instanceof Light) {
+					e.hit(flipper);
+				} else {
+					System.out.println("Element: " + name + " is kein Light");
 				}
-					return;
-				}
+				return;
+			}
 			
 		}
-		System.out.println("Unbekanntes Element: " + elementId);
+		System.out.println("Unbekanntes Element: " + name);
 	}
 }

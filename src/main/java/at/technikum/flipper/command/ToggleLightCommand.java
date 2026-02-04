@@ -4,15 +4,15 @@ import at.technikum.flipper.Flipper;
 
 public class ToggleLightCommand implements Command {
 	
-	private int elementId;
+	private String elementName;
 	
-	public ToggleLightCommand (int elementId) {
-		this.elementId = elementId;
+	public ToggleLightCommand (String elementName) {
+		this.elementName = elementName;
 		
 	}
 	
 	public void execute(Flipper flipper) {
-	  flipper.getElementMediator().toogleLight(elementId);
+	  flipper.getElementMediator().toogleLight(elementName);
 	}
 	
 	
