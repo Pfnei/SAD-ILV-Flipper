@@ -4,7 +4,7 @@ import at.technikum.flipper.Flipper;
 
 import java.util.Scanner;
 
-public class GuessNumberForPointsCommand {
+public class GuessNumberForPointsCommand implements Command {
 	
 	private final int points;
 	private final  GuessNumberCommand guessNumberCommand;
@@ -20,6 +20,5 @@ public class GuessNumberForPointsCommand {
 			System.out.printf("Gewonnen! +%d Punkte%n", points );
 			new AddPointsCommand(this.points).execute(flipper);
 		}
-		System.out.println("Aktuelle Kredits: " + flipper.getCredits());
 	}
 }

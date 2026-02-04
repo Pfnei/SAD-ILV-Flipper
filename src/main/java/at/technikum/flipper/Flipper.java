@@ -18,30 +18,6 @@ public class Flipper {
 		this.elementMediator =  new ElementMediator (this);
 	}
 	
-	public static void main(String[] args) {
-		Flipper flipper = new Flipper();
-		flipper.play();
-	}
-	
-	public void play() {
-		System.out.println("=== FLIPPER GAME ===\n");
-		
-		pressStart();
-		insertCoin();
-		pressStart();
-		flipLeft();
-		insertCoin();
-		flipRight();
-		pressStart();
-		flipLeft();
-		elementMediator.hit(2);
-		elementMediator.hit(1);
-		elementMediator.hit(3);
-		flipLeft();
-		
-		
-		
-	}
 	
 	
 	

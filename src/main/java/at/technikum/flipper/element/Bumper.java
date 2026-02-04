@@ -13,9 +13,4 @@ public class Bumper extends FlipperElement {
         super(name);
     }
     
-    public void hit(Flipper flipper) {
-        System.out.println("Hit Bumper " + name);
-        new AddPointsCommand(100).execute(flipper);
-        new ToggleRandomLightCommand();
-    }
 }

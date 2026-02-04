@@ -5,7 +5,7 @@ import at.technikum.flipper.util.Util;
 
 import java.util.Scanner;
 
-public class GuessNumberForCreditCommand {
+public class GuessNumberForCreditCommand implements Command {
 	
 	GuessNumberCommand guessNumberCommand;
 	
@@ -18,8 +18,9 @@ public class GuessNumberForCreditCommand {
 		if (guessNumberCommand.hasWon()) {
 			System.out.println("Gewonnen! +1 Kredit");
 			flipper.addCredit();
+			System.out.println("Aktuelle Kredits: " + flipper.getCredits());
 		}
-		System.out.println("Aktuelle Kredits: " + flipper.getCredits());
+		
 	}
 }
 
