@@ -1,8 +1,7 @@
 package at.technikum.flipper;
 
-import at.technikum.flipper.mediator.ElementMediator;
+import at.technikum.flipper.mediator.ElementMediatorClass;
 import at.technikum.flipper.state.*;
-import at.technikum.flipper.element.*;
 
 public class Flipper {
 	private State state;
@@ -10,16 +9,16 @@ public class Flipper {
 	private int score;
 	private int remainingBalls;
 	private static final int MAX_BALLS = 3;
-	private ElementMediator elementMediator;
+	private  ElementMediatorClass elementMediator;
 	
 	Flipper() {
 		this.state = new NoCreditState(this);
 		this.remainingBalls =  MAX_BALLS;
-		this.elementMediator =  new ElementMediator (this);
+		this.elementMediator =  new ElementMediatorClass(this);
+		new FlipperElementSetup().setupElements(this.elementMediator);
 	}
 	
-	
-	
+	public ElementMediatorClass getElementMediator() {return this.elementMediator;}
 	
 	public void transitionToReady() {
 		this.state = new ReadyState(this);
@@ -42,10 +41,7 @@ public class Flipper {
 	}
 	
 	
-	
-	
-	
-	public ElementMediator getElementMediator() {return this.elementMediator;}
+
 	public void decrementRemainingBalls() {remainingBalls--;}
 	public int getRemainingBalls() {return this.remainingBalls;};
 	

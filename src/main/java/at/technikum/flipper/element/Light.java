@@ -16,20 +16,21 @@ public class Light extends FlipperElement {
 	@Override
 	public void hit(Flipper flipper) {
 		System.out.println("Hit Light " + name);
-		if (isOn) {
-			System.out.println("Checkpot!!!");
-			new AddPointsCommand(1000).execute(flipper);
-			//new AddPointsCommand((int) (10 * Math.pow((double) id, (double) id))).execute(flipper);
-		}
-		else {new AddPointsCommand(50).execute(flipper);}
-		this.toogleLight();
+		if (hitCommand != null) hitCommand.execute(flipper);
+		toggleLight();
+		if (mediator != null) mediator.onHit(this);
 	}
 	
-	public void toogleLight() {
+	
+	public void toggleLight() {
 		isOn = !isOn;
 		if (isOn)
 			System.out.println("Light " + name + " is on.");
 		else
 			System.out.println("Light " + name+ " is off.");
+	}
+	
+	public boolean isOn() {
+		return isOn;
 	}
 }
