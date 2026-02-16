@@ -7,26 +7,43 @@ import java.util.ArrayList;
 
 
 
-public class ElementMediatorClass implements ElementMediator {
+public class ElementMediatorHub implements ElementMediator {
 	
 	
-	private ArrayList<FlipperElement> elements = new ArrayList<>();;
-	private ArrayList<Light> listOfLights = new ArrayList<>();
+	private final ArrayList<FlipperElement> elements = new ArrayList<>();;
+	private final ArrayList<Light> listOfLights = new ArrayList<>();
+	private final ArrayList<ElementMediator> rules = new ArrayList<>();
 	protected final Flipper flipper;
 	
-	public ElementMediatorClass(Flipper flipper) {
+	public ElementMediatorHub(Flipper flipper) {
 		this.flipper = flipper;
 	}
 	
-	@Override
-	public void onHit(FlipperElement element) {
+	public void addRule(ElementMediator rule) {
+		rules.add(rule);
 	}
 	
-	public void addElement(FlipperElement element) {
+	
+	public void addBaseElement(FlipperElement element) {
 		elements.add(element);
-		if (element.getMediator() == null) element.setMediator((ElementMediator) this);
 		if (element instanceof Light l) listOfLights.add(l);
 	}
+	
+	public void addMediatedElement(FlipperElement element) {
+		elements.add(element);
+		if (element.getMediator() == null) element.setMediator(this);
+		if (element instanceof Light l) listOfLights.add(l);
+	}
+	
+	public ArrayList<FlipperElement> getElements() {
+		return elements;
+	}
+	
+	public ArrayList<Light> getListOfLights() {
+		return listOfLights;
+	}
+	
+	
 	
 	
 	public FlipperElement getELementByName(String name) {
@@ -37,10 +54,6 @@ public class ElementMediatorClass implements ElementMediator {
 		}
 		System.out.println("Unbekanntes Element: " + name);
 		return null;
-	}
-	
-	public ArrayList<Light> getListOfLights() {
-		return listOfLights;
 	}
 	
 	
@@ -60,7 +73,12 @@ public class ElementMediatorClass implements ElementMediator {
 	}
 	
 	
-	
+	@Override
+	public void onHit(FlipperElement element) {
+		for (ElementMediator r : rules) {
+			r.onHit(element);
+		}
+	}
 	
 	
 	public void toogleLight(String name) {

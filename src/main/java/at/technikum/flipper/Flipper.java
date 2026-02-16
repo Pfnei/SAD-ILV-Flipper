@@ -1,7 +1,13 @@
 package at.technikum.flipper;
 
-import at.technikum.flipper.mediator.ElementMediatorClass;
+import at.technikum.flipper.element.*;
+import at.technikum.flipper.mediator.AllLightsOnBonusMediator;
+import at.technikum.flipper.mediator.ElementMediatorHub;
+import at.technikum.flipper.mediator.TargetGroupRampMediator;
 import at.technikum.flipper.state.*;
+
+import java.util.ArrayList;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Flipper {
 	private State state;
@@ -9,16 +15,33 @@ public class Flipper {
 	private int score;
 	private int remainingBalls;
 	private static final int MAX_BALLS = 3;
-	private  ElementMediatorClass elementMediator;
+	
+	private ElementMediatorHub elementMediator;
+	private  ArrayList<FlipperElement> elements;
 	
 	Flipper() {
 		this.state = new NoCreditState(this);
 		this.remainingBalls =  MAX_BALLS;
-		this.elementMediator =  new ElementMediatorClass(this);
-		new FlipperElementSetup().setupElements(this.elementMediator);
+		this.elementMediator =  new ElementMediatorHub(this);
+		FlipperElementSetup setup = new FlipperElementSetup();
+		setup.setupElements(this.elementMediator);
+		setup.setupGroups(this.elementMediator, this);
+		
+		this.elements = this.elementMediator.getElements();
+		
 	}
 	
-	public ElementMediatorClass getElementMediator() {return this.elementMediator;}
+	public ElementMediatorHub getElementMediator() {return this.elementMediator;}
+	
+	public ArrayList<FlipperElement> getElements() {
+		return this.elements;
+	}
+	
+	public void hitRandomElement() {
+		if (elements.isEmpty()) return;
+		int idx = ThreadLocalRandom.current().nextInt(elements.size());
+		elements.get(idx).hit(this);
+	}
 	
 	public void transitionToReady() {
 		this.state = new ReadyState(this);

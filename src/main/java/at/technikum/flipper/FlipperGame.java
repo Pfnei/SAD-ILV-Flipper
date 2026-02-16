@@ -31,14 +31,26 @@ public class FlipperGame {
         flipper.flipRight();
         flipper.pressStart();
         flipper.flipLeft();
+        flipper.getElementMediator().hit("Ramp-1");
         flipper.getElementMediator().hit("Bumper-4");
         flipper.getElementMediator().hit(2);
         flipper.getElementMediator().hit(1);
+        flipper.getElementMediator().hit("Ramp-1");
         flipper.getElementMediator().hit("Mystery Hole");
-        flipper.getElementMediator().hit(3);
         flipper.getElementMediator().hit("Target-Red");
+        flipper.getElementMediator().hit("Light-1");
+        flipper.getElementMediator().hit("Light-2");
+        flipper.getElementMediator().hit("Light-3");
+        flipper.getElementMediator().hit("Light-4");
         
        // System.out.println("Aktueller Score: " + ScoreBoard.getInstance().getScore());
+        
+        
+        System.out.println("\n--- Random Hits ---\n");
+        
+        for (int i = 0; i < 5; i++) {
+            flipper.hitRandomElement();
+        }
         
         System.out.println("\n--- Bälle verlieren ---\n");
         
