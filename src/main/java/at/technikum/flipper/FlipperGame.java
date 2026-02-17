@@ -2,6 +2,7 @@ package at.technikum.flipper;
 
 import at.technikum.flipper.command.*;
 import at.technikum.flipper.element.*;
+import at.technikum.flipper.visitor.ResetVisitor;
 
 public class FlipperGame {
     
@@ -44,6 +45,14 @@ public class FlipperGame {
         flipper.getElementMediator().hit("Light-4");
         
        // System.out.println("Aktueller Score: " + ScoreBoard.getInstance().getScore());
+        
+        
+        System.out.println("\n--- RESET Elements ---\n");
+        
+        ResetVisitor resetVisitor = new ResetVisitor();
+        for (FlipperElement e : flipper.getElements()) {
+            e.accept(resetVisitor);
+        }
         
         
         System.out.println("\n--- Random Hits ---\n");

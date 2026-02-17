@@ -2,6 +2,7 @@ package at.technikum.flipper.element;
 
 import at.technikum.flipper.Flipper;
 import at.technikum.flipper.command.AddPointsCommand;
+import at.technikum.flipper.visitor.FlipperElementVisitor;
 
 public class Light extends FlipperElement {
 	
@@ -33,4 +34,16 @@ public class Light extends FlipperElement {
 	public boolean isOn() {
 		return isOn;
 	}
+	
+	public void reset() {
+		isOn = false;
+		System.out.println("Light " + name + " ist aus.");
+		System.out.println("Reset: " + name);
+	}
+	
+	@Override
+	public void accept(FlipperElementVisitor visitor) {
+		visitor.visit(this);
+	}
+	
 }

@@ -1,6 +1,7 @@
 package at.technikum.flipper.element;
 
 import at.technikum.flipper.Flipper;
+import at.technikum.flipper.visitor.FlipperElementVisitor;
 
 public class Target extends FlipperElement {
     private boolean isDown = false;
@@ -23,5 +24,11 @@ public class Target extends FlipperElement {
     public void reset() {
         isDown = false;
         System.out.println("Target " + name + " ist wieder oben!");
+        System.out.println("Reset: " + name);
+    }
+    
+    @Override
+    public void accept(FlipperElementVisitor visitor) {
+        visitor.visit(this);
     }
 }

@@ -3,6 +3,7 @@ package at.technikum.flipper.element;
 import at.technikum.flipper.Flipper;
 import at.technikum.flipper.command.*;
 import at.technikum.flipper.mediator.ElementMediator;
+import at.technikum.flipper.visitor.FlipperElementVisitor;
 
 public abstract class FlipperElement {
 	protected String name;
@@ -41,5 +42,5 @@ public abstract class FlipperElement {
 		return name;
 	}
 	
-
+	public abstract void accept(FlipperElementVisitor visitor);
 }
