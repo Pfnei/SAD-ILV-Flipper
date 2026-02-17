@@ -6,7 +6,7 @@ import at.technikum.flipper.visitor.FlipperElementVisitor;
 public class Ramp extends FlipperElement {
 	
 	private boolean isOpen = false;
-	private int passCount= 0;
+	private int runCount= 0;
 	
 	public Ramp(String name) {
 		super(name);
@@ -17,8 +17,8 @@ public class Ramp extends FlipperElement {
 		if (!isOpen) {
 			System.out.println("Rampe " + name + " ist nicht offen!");
 		} else {
-			passCount++;
-			System.out.println("Rampe " + name + " wird zum " + passCount + ". durchlaufen") ;
+			runCount++;
+			System.out.println("Rampe " + name + " wird zum " + runCount + ". durchlaufen") ;
 			super.hit(flipper);
 		}
 	}
@@ -33,14 +33,18 @@ public class Ramp extends FlipperElement {
 		System.out.println("Rampe " + name + " wurde geschlossen!");
 	}
 	
-	
 	public boolean isOpen() {
 		return isOpen;
 	}
 	
+	public int getRuns(){
+		return runCount;
+	}
+	
+	
 	public void reset() {
 		isOpen = false;
-		passCount= 0;
+		runCount= 0;
 		System.out.println("Ramp " + name + " ist wieder geschlossen!");
 		System.out.println("Reset: " + name);
 	}

@@ -29,6 +29,10 @@ public class Bumper extends FlipperElement {
 		System.out.println("Reset: " + name);
 	}
 	
+	public int getHitCount () {
+		return hitCount;
+	}
+	
 	@Override
 	public void accept(FlipperElementVisitor visitor) {
 		visitor.visit(this);

@@ -1,8 +1,7 @@
 package at.technikum.flipper;
 
-import at.technikum.flipper.command.*;
 import at.technikum.flipper.element.*;
-import at.technikum.flipper.visitor.ResetVisitor;
+import at.technikum.flipper.visitor.*;
 
 public class FlipperGame {
     
@@ -31,7 +30,7 @@ public class FlipperGame {
         
         flipper.flipRight();
         flipper.pressStart();
-        flipper.flipLeft();
+
         flipper.getElementMediator().hit("Ramp-1");
         flipper.getElementMediator().hit("Bumper-4");
         flipper.getElementMediator().hit(2);
@@ -47,12 +46,7 @@ public class FlipperGame {
        // System.out.println("Aktueller Score: " + ScoreBoard.getInstance().getScore());
         
         
-        System.out.println("\n--- RESET Elements ---\n");
-        
-        ResetVisitor resetVisitor = new ResetVisitor();
-        for (FlipperElement e : flipper.getElements()) {
-            e.accept(resetVisitor);
-        }
+       //  resetElements();
         
         
         System.out.println("\n--- Random Hits ---\n");
@@ -64,8 +58,11 @@ public class FlipperGame {
         System.out.println("\n--- Bälle verlieren ---\n");
         
         flipper.flipLeft();
+       this.startPointsVisitor();
         flipper.flipLeft();
+         this.startPointsVisitor();
         flipper.flipLeft();
+        this.startPointsVisitor();
         
        // flipper.loseBall();
         // flipper.loseBall();
@@ -74,5 +71,27 @@ public class FlipperGame {
         
     }
     
+    public void resetElements() {
+        
+        System.out.println("\n--- RESET Elements ---\n");
+        
+        ResetVisitor resetVisitor = new ResetVisitor();
+        for (FlipperElement e : flipper.getElements()) {
+            e.accept(resetVisitor);
+        }
+    }
+        public void startPointsVisitor() {
+            System.out.println("\n--- ZUSATZPUNKTVERGABE ---\n");
+            AdditionalPointsVisitor v = new AdditionalPointsVisitor(flipper);
+            for (FlipperElement e : flipper.getElements()) {
+                e.accept(v);
+            }
+            int bonus = v.getTotal();
+            System.out.println("Zusatzpunkte: " + bonus);
+            flipper.addScore(bonus);
+        }
+   
+    
     
 }
+
