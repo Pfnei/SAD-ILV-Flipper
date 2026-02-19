@@ -1,5 +1,9 @@
 package at.technikum.flipper;
 
+import at.technikum.flipper.abstractfactory.DigitalDisplayFactory;
+import at.technikum.flipper.abstractfactory.EpicDisplayFactory;
+import at.technikum.flipper.abstractfactory.FlipperDisplay;
+import at.technikum.flipper.abstractfactory.NancyjUnderlinedDisplayFactory;
 import at.technikum.flipper.element.*;
 import at.technikum.flipper.mediator.AllLightsOnBonusMediator;
 import at.technikum.flipper.mediator.ElementMediatorHub;
@@ -17,12 +21,14 @@ public class Flipper {
 	private static final int MAX_BALLS = 3;
 	
 	private ElementMediatorHub elementMediator;
-	private  ArrayList<FlipperElement> elements;
+	private ArrayList<FlipperElement> elements;
+	private FlipperDisplay display;
 	
 	Flipper() {
 		this.state = new NoCreditState(this);
-		this.remainingBalls =  MAX_BALLS;
-		this.elementMediator =  new ElementMediatorHub(this);
+		this.remainingBalls = MAX_BALLS;
+		this.elementMediator = new ElementMediatorHub(this);
+		this.display = new FlipperDisplay(new DigitalDisplayFactory());
 		FlipperElementSetup setup = new FlipperElementSetup();
 		setup.setupElements(this.elementMediator);
 		setup.setupGroups(this.elementMediator, this);
@@ -63,10 +69,72 @@ public class Flipper {
 		this.state = new EndState(this);
 	}
 	
+	public void useDigitalFont() {
+		display.setFactory(new DigitalDisplayFactory());
+	}
+	
+	public void useEpicFont() {
+		display.setFactory(new EpicDisplayFactory());
+	}
+	
+	public void useNancyjUnderlinedFont() {
+		display.setFactory(new NancyjUnderlinedDisplayFactory());
+	}
+	
+	
+	public void showPressStart() {
+		display.showPressStart();
+	}
+	
+	
+	public void showBall() {
+		display.showBall(getCurrentBall());
+	}
 	
 
+	public void showGameOver() {
+		display.showGameOver();
+	}
+	
+	public void showCredits() {
+		display.showCredits(credits);
+	}
+	
+	
+	
+	public void showGameStart() {
+		display.showGameStart();
+	}
+	
+	public void showGameRunning() {
+		display.showGameRunning();
+	}
+	
+	public void showRandomHits() {
+		display.showRandomHits();
+	}
+	
+	public void showResetElements() {
+		display.showResetElements();
+	}
+	
+	public void showBonusGame() {
+		display.showBonusGame();
+	}
+	
+	public void showBonusPoints() {
+		display.showBonusPoints();
+	}
+	
+	public int getCurrentBall() {
+		return MAX_BALLS - remainingBalls;
+	}
+	
 	public void decrementRemainingBalls() {remainingBalls--;}
-	public int getRemainingBalls() {return this.remainingBalls;};
+	
+	public int getRemainingBalls() {return this.remainingBalls;}
+	
+	;
 	
 	public void addCredit() {credits++;}
 	
