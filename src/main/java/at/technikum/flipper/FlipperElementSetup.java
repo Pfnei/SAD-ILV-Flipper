@@ -10,6 +10,8 @@ import java.util.Scanner;
 
 public class FlipperElementSetup {
 	
+	
+	
 	public void setupElements(ElementMediatorHub mediator) {
 		Scanner scanner = new Scanner(System.in);
 		
@@ -64,7 +66,6 @@ public class FlipperElementSetup {
 		MacroCommand bumperMacro = new MacroCommand();
 		bumperMacro.addCommand(new AddPointsCommand(50));
 		bumperMacro.addCommand(new PlaySoundCommand("bumper.wav"));
-		bumperMacro.addCommand(new GuessNumberForCreditCommand(scanner, 1, 3));
 		bumper4.setHitCommand(bumperMacro);
 		mediator.addBaseElement(bumper4);
 		
@@ -72,18 +73,19 @@ public class FlipperElementSetup {
 		MacroCommand holeMacro = new MacroCommand();
 		holeMacro.addCommand(new AddPointsCommand(500));
 		holeMacro.addCommand(new PlaySoundCommand("mystery.wav"));
-		holeMacro.addCommand(new GuessNumberForPointsCommand(scanner, 1, 4, 333));
+		holeMacro.addCommand(new GuessNumberForPointsCommand(scanner, 333));
 		mysteryHole.setHitCommand(holeMacro);
 		mediator.addBaseElement(mysteryHole);
 	}
 	
 	
 	public void setupGroups(ElementMediatorHub mediator, Flipper flipper) {
+		Scanner scanner = new Scanner(System.in);
 		Ramp ramp = (Ramp) mediator.getELementByName("Ramp-1");
 		Target red = (Target) mediator.getELementByName("Target-Red");
 		Target blue = (Target) mediator.getELementByName("Target-Blue");
 		
 		mediator.addRule(new TargetGroupRampMediator(ramp, red, blue));
-		mediator.addRule(new AllLightsOnBonusMediator(flipper, mediator.getListOfLights(), 500));
+		mediator.addRule(new AllLightsOnBonusMediator(flipper, mediator.getListOfLights(), 500, scanner));
 	}
 }

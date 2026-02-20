@@ -11,7 +11,10 @@ import at.technikum.flipper.mediator.TargetGroupRampMediator;
 import at.technikum.flipper.state.*;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
+
+import static at.technikum.flipper.util.Util.randomInt;
 
 public class Flipper {
 	private State state;
@@ -21,8 +24,19 @@ public class Flipper {
 	private static final int MAX_BALLS = 3;
 	
 	private ElementMediatorHub elementMediator;
-	private ArrayList<FlipperElement> elements;
+	private List<FlipperElement> elements;
 	private FlipperDisplay display;
+	private int failRateLeft;
+	
+	public int getFailRateRight() {
+		return failRateRight;
+	}
+	
+	public int getFailRateLeft() {
+		return failRateLeft;
+	}
+	
+	private int failRateRight;
 	
 	Flipper() {
 		this.state = new NoCreditState(this);
@@ -35,11 +49,14 @@ public class Flipper {
 		
 		this.elements = this.elementMediator.getElements();
 		
+		this.failRateLeft = randomInt (randomInt(2,3),randomInt(5,6));
+		this.failRateRight = randomInt (randomInt(3,4),randomInt(4,5));
+		
 	}
 	
 	public ElementMediatorHub getElementMediator() {return this.elementMediator;}
 	
-	public ArrayList<FlipperElement> getElements() {
+	public List<FlipperElement> getElements() {
 		return this.elements;
 	}
 	
@@ -127,7 +144,7 @@ public class Flipper {
 	}
 	
 	public int getCurrentBall() {
-		return MAX_BALLS - remainingBalls;
+		return MAX_BALLS - remainingBalls+1;
 	}
 	
 	public void decrementRemainingBalls() {remainingBalls--;}
@@ -145,6 +162,10 @@ public class Flipper {
 	public void addScore(int points) {
 		score += points;
 		System.out.println("Score +" + points + " => " + score);
+	}
+	public void endGame (){
+		System.out.println("Spiel wird beendet!");
+		System.exit(0);
 	}
 	
 	public State getState() {return this.state;}

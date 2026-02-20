@@ -11,6 +11,7 @@ public class ReadyState extends State{
 	@Override
 	public void pressStart() {
 		flipper.useOneCredit();
+		flipper.showGameStart();
 		flipper.transitionToPlaying();
 	}
 	

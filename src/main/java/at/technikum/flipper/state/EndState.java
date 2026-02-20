@@ -18,7 +18,7 @@ public class EndState extends State {
 	public void bonusGame() {
 		Scanner scanner = new Scanner(System.in);
 		
-		new GuessNumberForCreditCommand(scanner, 1, 5).execute(flipper);
+		new GuessNumberForCreditCommand(scanner).execute(flipper);
 		//new GuessNumberForPointsCommand(scanner, 1, 1, 100).execute(flipper);
 		if (flipper.getCredits() > 0) {
 			flipper.transitionToReady();

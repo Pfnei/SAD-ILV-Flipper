@@ -4,15 +4,15 @@ import at.technikum.flipper.Flipper;
 
 import at.technikum.flipper.element.*;
 import java.util.ArrayList;
-
+import java.util.List;
 
 
 public class ElementMediatorHub implements ElementMediator {
 	
 	
-	private final ArrayList<FlipperElement> elements = new ArrayList<>();;
-	private final ArrayList<Light> listOfLights = new ArrayList<>();
-	private final ArrayList<ElementMediator> rules = new ArrayList<>();
+	private final List<FlipperElement> elements = new ArrayList<>();;
+	private final List<Light> listOfLights = new ArrayList<>();
+	private final List<ElementMediator> rules = new ArrayList<>();
 	protected final Flipper flipper;
 	
 	public ElementMediatorHub(Flipper flipper) {
@@ -35,11 +35,11 @@ public class ElementMediatorHub implements ElementMediator {
 		if (element instanceof Light l) listOfLights.add(l);
 	}
 	
-	public ArrayList<FlipperElement> getElements() {
+	public List<FlipperElement> getElements() {
 		return elements;
 	}
 	
-	public ArrayList<Light> getListOfLights() {
+	public List<Light> getListOfLights() {
 		return listOfLights;
 	}
 	

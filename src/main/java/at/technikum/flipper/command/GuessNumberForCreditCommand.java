@@ -9,8 +9,8 @@ public class GuessNumberForCreditCommand implements Command {
 	
 	GuessNumberCommand guessNumberCommand;
 	
-	public GuessNumberForCreditCommand(Scanner scanner, int lower, int upper) {
-		this.guessNumberCommand = new GuessNumberCommand(scanner, lower, upper);
+	public GuessNumberForCreditCommand(Scanner scanner) {
+		this.guessNumberCommand = new GuessNumberCommand(scanner);
 	}
 	
 	public void execute(Flipper flipper) {

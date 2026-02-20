@@ -6,6 +6,7 @@ import at.technikum.flipper.element.Light;
 import at.technikum.flipper.util.Util;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ToggleRandomLightCommand implements Command {
 	
@@ -14,7 +15,7 @@ public class ToggleRandomLightCommand implements Command {
 	}
 	
 	public void execute(Flipper flipper) {
-		ArrayList<Light> listOfLights = flipper.getElementMediator().getListOfLights();
+		List<Light> listOfLights = flipper.getElementMediator().getListOfLights();
 		int sizeLightsList = listOfLights.size();
 		int randomLight =  Util.randomInt(0,sizeLightsList-1);
 		new ToggleLightCommand(listOfLights.get(randomLight).getName()).execute(flipper);

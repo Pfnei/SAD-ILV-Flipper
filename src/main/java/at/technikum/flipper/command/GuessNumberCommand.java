@@ -5,6 +5,8 @@ import at.technikum.flipper.util.Util;
 
 import java.util.Scanner;
 
+import static at.technikum.flipper.util.Util.randomInt;
+
 public class GuessNumberCommand implements Command {
 	private final Scanner scanner;
 	private final int correctNumber;
@@ -12,17 +14,17 @@ public class GuessNumberCommand implements Command {
 	private final int lower;
 	private final int upper;
 	
-	public GuessNumberCommand(Scanner scanner, int lower, int upper) {
+	public GuessNumberCommand(Scanner scanner) {
 		this.scanner = scanner;
-		this.lower = lower;
-		this.upper = upper;
-		this.correctNumber = Util.randomInt(lower, upper);
+		this.lower = randomInt(1,3);
+		this.upper = randomInt(5,15);
+		this.correctNumber = randomInt(lower, upper);
 		this.won = false;
 	}
 	
 	@Override
 	public void execute(Flipper flipper) {
-		System.out.println("=== BONUS SPIEL ===");
+		System.out.println("\n=== BONUS ===\n");
 		int guess = 0;
 		while (true) {
 			System.out.printf("Rate eine Zahl (%d-%d):", lower, upper);
@@ -39,7 +41,7 @@ public class GuessNumberCommand implements Command {
 			System.out.println("RICHTIG!");
 			won = true;
 		} else {
-			System.out.println("FALSCH! Die Zahl war " + correctNumber);
+			System.out.printf("FALSCH! Die Zahl war %d%n", correctNumber);
 			won = false;
 		}
 	}
