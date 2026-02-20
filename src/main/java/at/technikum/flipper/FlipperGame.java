@@ -124,7 +124,7 @@ public class FlipperGame {
 	public void resetElements() {
 		
 		flipper.showResetElements();
-		System.out.println("\n--- Elemente werden in den Ausgangszustands gesetzt ---\n-");
+		System.out.println("\n--- Elemente werden in den Ausgangszustand gesetzt ---\n-");
 		
 		ResetVisitor resetVisitor = new ResetVisitor();
 		for (FlipperElement e : flipper.getElements()) {

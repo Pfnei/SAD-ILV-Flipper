@@ -17,7 +17,7 @@ public class FlipperElementSetup {
 		
 		Ramp ramp1 = new Ramp("Ramp-1");
 		ramp1.setHitCommand(new AddPointsCommand(2000));
-		mediator.addBaseElement(ramp1);
+		mediator.addBaseElement(new RampAdapter(ramp1));
 		
 		Target targetRed = new Target("Target-Red");
 		targetRed.setHitCommand(new AddPointsCommand(100));
@@ -81,7 +81,8 @@ public class FlipperElementSetup {
 	
 	public void setupGroups(ElementMediatorHub mediator, Flipper flipper) {
 		Scanner scanner = new Scanner(System.in);
-		Ramp ramp = (Ramp) mediator.getELementByName("Ramp-1");
+		RampAdapter rampAdapter = (RampAdapter) mediator.getELementByName("Ramp-1");
+		Ramp ramp = rampAdapter.getRamp();
 		Target red = (Target) mediator.getELementByName("Target-Red");
 		Target blue = (Target) mediator.getELementByName("Target-Blue");
 		

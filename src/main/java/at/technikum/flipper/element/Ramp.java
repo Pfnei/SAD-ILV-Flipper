@@ -12,8 +12,8 @@ public class Ramp extends FlipperElement {
 		super(name);
 	}
 	
-	@Override
-	public void hit(Flipper flipper) {
+	
+	public void crash(Flipper flipper) {
 		if (!isOpen) {
 			System.out.println("Rampe " + name + " ist nicht offen!");
 		} else {
