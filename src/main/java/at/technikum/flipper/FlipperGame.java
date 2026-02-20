@@ -24,6 +24,8 @@ public class FlipperGame {
 	
 	public void play() {
 		
+		System.out.println("\n=== Es wurde kein Singleton verwendet, da ich es nicht für sinnvoll halte. ===\n");
+		
 		System.out.println("\n=== FLIPPER GAME ===\n");
 		
 		do {
