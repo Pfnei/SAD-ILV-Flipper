@@ -41,7 +41,7 @@ public class GuessNumberCommand implements Command {
 			System.out.println("RICHTIG!");
 			won = true;
 		} else {
-			System.out.printf("FALSCH! Die Zahl war %d%n", correctNumber);
+			System.out.println("FALSCH!");
 			won = false;
 		}
 	}

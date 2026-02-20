@@ -27,7 +27,8 @@ public class FlipperGame {
 		System.out.println("\n=== FLIPPER GAME ===\n");
 		
 		do {
-			
+			flipper.setRemainingBalls(3);
+			flipper.resetScore();
 			int fontSelect = InputUtil.askForInt("Wähle eine Schrift für das Game:\n" +
 					"  (1) Digital\n" +
 					"  (2) Epic\n" +
@@ -54,7 +55,7 @@ public class FlipperGame {
 			int chooseAction = InputUtil.askForInt("Was willst du machen:\n" +
 					"  (1) Spiel starten\n" +
 					"  (2) Münze einwerfen & Spiel starten\n"					+
-					"  (3) 2! Münze einwerfen & Spiel starten\n", 1, 2);
+					"  (3) 2! Münze einwerfen & Spiel starten\n", 1, 3);
 			
 			switch (chooseAction) {
 				case 1:
@@ -72,7 +73,7 @@ public class FlipperGame {
 				default:
 			}
 			
-			// Autor anzeigen
+			// Author anzeigen
 			flipper.pressStart();
 			
 			// hier könnte man Standardelemente Testen
@@ -88,6 +89,7 @@ public class FlipperGame {
 			do {
 				
 				if (oldBalls != flipper.getRemainingBalls()) {
+					startPointsVisitor();
 					flipper.showBall();
 					System.out.println("\n--- Ball ist im Spiel und trifft zufällig Elemente ---\n");
 				}
@@ -100,7 +102,10 @@ public class FlipperGame {
 				
 				for (int i = 0; i < hits; i++) {
 					flipper.hitRandomElement();
+					if (i == 9) {resetElements();}
 				}
+				
+				
 				
 				String flip = askForLeftRight ("\nLinken oder Rechten Flipper betätigen (L/R)?");
 				
@@ -109,39 +114,17 @@ public class FlipperGame {
 				if (flip.equals("r") ){flipper.flipRight();}
 				
 			} while (flipper.getRemainingBalls()>0);
-			flipper.endGame();
 			
-			//  resetElements();
-			
-			
-			System.out.println("\n--- Random Hits ---\n");
-			
-			for (int i = 0; i < 5; i++) {
-				flipper.hitRandomElement();
-			}
-			
-			System.out.println("\n--- Bälle verlieren ---\n");
-			
-			flipper.flipLeft();
-			this.startPointsVisitor();
-			flipper.flipLeft();
-			this.startPointsVisitor();
-			flipper.flipLeft();
-			this.startPointsVisitor();
-			
-			// flipper.loseBall();
-			// flipper.loseBall();
-			//flipper.loseBall();
-			
-			
-		} while (flipper.getRemainingBalls()>0);
+		
+		} while (flipper.getCredits()>0);
 	}
 	
 	
 	
 	public void resetElements() {
 		
-		System.out.println("\n--- RESET Elements ---\n");
+		flipper.showResetElements();
+		System.out.println("\n--- Elemente werden in den Ausgangszustands gesetzt ---\n-");
 		
 		ResetVisitor resetVisitor = new ResetVisitor();
 		for (FlipperElement e : flipper.getElements()) {
@@ -150,6 +133,7 @@ public class FlipperGame {
 	}
 	
 	public void startPointsVisitor() {
+		flipper.showBonusPoints();
 		System.out.println("\n--- ZUSATZPUNKTVERGABE ---\n");
 		AdditionalPointsVisitor v = new AdditionalPointsVisitor(flipper);
 		for (FlipperElement e : flipper.getElements()) {

@@ -20,6 +20,8 @@ public class Flipper {
 	private State state;
 	private int credits;
 	private int score;
+	
+
 	private int remainingBalls;
 	private static final int MAX_BALLS = 3;
 	
@@ -150,14 +152,20 @@ public class Flipper {
 	public void decrementRemainingBalls() {remainingBalls--;}
 	
 	public int getRemainingBalls() {return this.remainingBalls;}
+	public void setRemainingBalls(int remainingBalls) {
+		this.remainingBalls = remainingBalls;
+	}
 	
-	;
 	
 	public void addCredit() {credits++;}
 	
 	public void useOneCredit() {credits--;}
 	
 	public int getCredits() {return this.credits;}
+	
+	public void resetScore() {
+		score=0;
+	}
 	
 	public void addScore(int points) {
 		score += points;

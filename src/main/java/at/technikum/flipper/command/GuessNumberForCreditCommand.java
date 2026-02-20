@@ -16,11 +16,14 @@ public class GuessNumberForCreditCommand implements Command {
 	public void execute(Flipper flipper) {
 		guessNumberCommand.execute(flipper);
 		if (guessNumberCommand.hasWon()) {
+			flipper.showBonusGame();
 			System.out.println("Gewonnen! +1 Kredit");
 			flipper.addCredit();
 			System.out.println("Aktuelle Kredits: " + flipper.getCredits());
 		}
-		
+		else{
+			System.out.println("Aktuelle Kredits: " + flipper.getCredits());
+		}
 	}
 }
 

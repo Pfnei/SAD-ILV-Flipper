@@ -36,6 +36,10 @@ public class AllLightsOnBonusMediator implements ElementMediator {
 		flipper.addScore(bonusPoints);
 		new GuessNumberForCreditCommand(scanner).execute(flipper);
 		
+		for (Light l : lights) {
+			l.reset();
+		}
+		
 		
 	}
 }

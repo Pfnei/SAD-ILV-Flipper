@@ -8,22 +8,35 @@ import at.technikum.flipper.util.Util;
 
 import java.util.Scanner;
 
+import static at.technikum.flipper.util.InputUtil.askForYesNo;
+
 public class EndState extends State {
 	
 	public EndState(Flipper flipper) {
 		super(flipper);
+		flipper.showGameOver();
 		bonusGame();
 	}
 	
+	
 	public void bonusGame() {
 		Scanner scanner = new Scanner(System.in);
-		
+		flipper.showBonusGame();
 		new GuessNumberForCreditCommand(scanner).execute(flipper);
-		//new GuessNumberForPointsCommand(scanner, 1, 1, 100).execute(flipper);
 		if (flipper.getCredits() > 0) {
 			flipper.transitionToReady();
 		} else {
-			flipper.transitionToNoCredit();
+			System.out.println("Kein Kredit vorhanden!");
+			var insertCoin = askForYesNo("Willst du eine Münze einwerfen? (Y/N)");
+			if (insertCoin) {
+				System.out.println("\nDu hast: " + flipper.getCredits() + " Credits! \n");
+				flipper.transitionToNoCredit();
+				flipper.insertCoin();
+			}
+			else{
+				flipper.endGame();
+			}
+			
 		}
 	}
 	
